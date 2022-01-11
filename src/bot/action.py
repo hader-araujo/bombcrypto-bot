@@ -4,7 +4,7 @@ import numpy as np
 import pyautogui
 import time
 
-import pygetwindow
+import pygetwindow as gw
 
 import src.bot.logger as Log
 import src.env as env
@@ -118,7 +118,7 @@ def closeMetamaskWindow():
     try:
         title = 'MetaMask Notification'
         time.sleep(7)
-        windows = pygetwindow.getWindowsWithTitle(title)
+        windows = gw.getWindowsWithTitle(title)
         for window in windows:
             window.close()
     except:
@@ -127,7 +127,7 @@ def closeMetamaskWindow():
 def maximizeMetamaskNotification():
     title = 'MetaMask Notification'
     time.sleep(8)
-    windows = pygetwindow.getWindowsWithTitle(title)
+    windows = gw.getWindowsWithTitle(title)
     if len(windows) > 0:
         current_window = windows[0]
         current_window.activate()
