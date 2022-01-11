@@ -16,6 +16,8 @@
 - for `windows` _run as administrator_ the `install.bat` file in the bot's main folder.
 - for `linux` execute `run.sh` file in the bot's main folder.
 
+- PS: To run on `mac` you need update `config.yaml` property `system` with value `"mac"`, and if you have retina display, set `is_retina_display` value to `True`.
+
 # Settings:
 
 You can configure some options by changing the `config.yaml` file in the bot's main folder.

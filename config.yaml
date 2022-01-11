@@ -136,6 +136,9 @@ click_and_drag_amount: 200
 # full  = seleciona somente os heróis com a barra de stamina cheia
 select_heroes_mode: "green"
 
+green_bar_offset: 270
+full_bar_offset: 100
+
 # [en_US] Option for save logs to a file (logs.txt)
 # Default value: False
 # Available options: False or True
@@ -189,6 +192,17 @@ scale_image:
   # [pt_BR] Quando a escala está habilitada, especificar o valor de threshold para comparação de imagens
   # Valor padrão: 0.9
   threshold: 0.9
+
+# [en_US] Operational System
+# Values:
+#  - "windows" (default)
+#  - "mac"
+#
+# [pt_BR] Qual sistema operacional está utilizando
+# Valores possíveis:
+#  - "windows" (padrão)
+#  - "mac"
+system: "windows"
 
 debug:
   # When home feature enable

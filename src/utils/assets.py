@@ -5,22 +5,22 @@ from src.utils import string
 from src.utils.image import resizeImageForScale
 
 def loadHeroesImagesToHome():
-    file_names = listdir('./targets/heroes-to-send-home')
+    file_names = listdir('./src/assets/{}/heroes-to-send-home'.format(env.system))
     heroes = []
     for file in file_names:
-        path = './targets/heroes-to-send-home/' + file
-        # TODO: add scale?
-        hero_image = cv2.imread(path)
-        heroes.append(hero_image)
+        if file != '.gitkeep':
+            path = './src/assets/{}/heroes-to-send-home/{}'.format(env.system, file)
+            hero_image = cv2.imread(path)
+            heroes.append(hero_image)
 
     print('>>---> %d heroes that should be sent home loaded' % len(heroes))
     return heroes
 
 def loadImages():
-    file_names = listdir('./targets/')
+    file_names = listdir('./src/assets/{}'.format(env.system))
     targets = {}
     for file in file_names:
-        path = 'targets/' + file
+        path = 'src/assets/{}/{}'.format(env.system,file)
         target_name = string.removeSuffix(file, '.png')
         temp_image = cv2.imread(path)
         if env.scale_image['enable']:
