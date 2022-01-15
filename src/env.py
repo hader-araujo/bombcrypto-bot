@@ -46,8 +46,12 @@ green_bar_offset = cfg['green_bar_offset']
 full_bar_offset = cfg['full_bar_offset']
 
 if not ['mac', 'windows'].__contains__(system):
-    logger('Your config.yaml has invalid `system` value.', color='red')
+    logger('ERROR: Your config.yaml has invalid `system` value.', color='red')
     raise 'invalid OS'
+
+if system == 'mac' and multi_account_same_monitor:
+    logger('ERROR: `MAC` system does not support window library manager.\nPlease, disable `multi_account_same_monitor` on `config.yaml`.')
+    raise 'MAC doest not support `multi_account_same_monitor`'
 
 logger('Loading assets...', color='green')
 images = loadImages()

@@ -9,7 +9,7 @@ time_intervals:
   #
   # [pt_BR] Intervalo de tempo para verificar se há heróis disponíveis para trabalhar
   # Valor padrão (em minutos): 10
-  send_heroes_for_work: 12
+  send_heroes_for_work: 15
 
   # [en_US] Time interval to update heroes position in the map,
   # Default value (in minutes): 3
@@ -76,7 +76,7 @@ threshold:
   # Default value: 0.9
   #
   # [pt_BR]
-  # Valor padrão: 0.9
+  # Valor padrão: 0.8
   go_to_work_all_btn: 0.8
 
   # [en_US]
@@ -104,8 +104,8 @@ scroll_size: 60
 # Default value: 3
 #
 # [pt_BR]
-# Valor padrão: 3
-scroll_attemps: 4
+# Valor padrão: 5
+scroll_attemps: 5
 
 # [en_US]
 # Default value: true
@@ -136,6 +136,10 @@ click_and_drag_amount: 200
 # full  = seleciona somente os heróis com a barra de stamina cheia
 select_heroes_mode: "green"
 
+# [en_US] To send heroes to work, is located green bar, and this offset, is distance between greenbar (on left) to "work button" (on right).
+# if this clicks is missing, try increment more value on this variable.
+# [PT_br] Para enviar os bonecos para trabalhar, ele localiza a barra berde e esses offsets são a distancia entre a barrinha verde (que fica na esquerda),
+# até o "botão work" (na direita). Se seu macro está tentando clicar no botão em um espaço vázio, tente aumentar esses valores.
 green_bar_offset: 270
 full_bar_offset: 100
 
