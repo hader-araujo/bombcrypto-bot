@@ -18,6 +18,9 @@ global force_full_screen
 global mouse_move_speed
 global in_login_process
 global debug
+global system
+global green_bar_offset
+global full_bar_offset
 
 logger('Setting up default values for variables...', color='green')
 window_object = None
@@ -38,6 +41,17 @@ scale_image = cfg['scale_image']
 multi_account_same_monitor = cfg['multiples_accounts_same_monitor']
 mouse_move_speed = cfg['mouse_move_speed']
 debug = cfg['debug']
+system = cfg['system']
+green_bar_offset = cfg['green_bar_offset']
+full_bar_offset = cfg['full_bar_offset']
+
+if not ['mac', 'windows'].__contains__(system):
+    logger('ERROR: Your config.yaml has invalid `system` value.', color='red')
+    raise 'invalid OS'
+
+if system == 'mac' and multi_account_same_monitor:
+    logger('ERROR: `MAC` system does not support window library manager.\nPlease, disable `multi_account_same_monitor` on `config.yaml`.')
+    raise 'MAC doest not support `multi_account_same_monitor`'
 
 logger('Loading assets...', color='green')
 images = loadImages()

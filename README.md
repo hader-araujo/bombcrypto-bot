@@ -16,6 +16,8 @@
 - Para `windows` _execute como administrador_ o arquivo `run.bat` na pasta principal.
 - Para `linux` o arquivo `run.sh` na pasta principal.
 
+- OBS: Para executar em `mac` é necessário alterar no arquivo `config.yaml` o valor de `system` para `"mac"`, e se você tem um monitor retina, atualize o valor de `is_retina_display` para `True`.
+
 # Configurações:
 
 Você pode configurar algumas opções alterando o arquivo `config.yaml` na pasta principal do bot.

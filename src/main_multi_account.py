@@ -1,6 +1,6 @@
 import time
 import sys
-import pygetwindow
+import pygetwindow as gw
 
 from src.utils.number import addRandomness
 import src.bot.logger as Log
@@ -19,7 +19,7 @@ def runMultiAccount():
     Log.logger('🆗 Start')
     Log.logger('Searching for windows with contains title: {}'.format(title), color='yellow')
 
-    for w in pygetwindow.getWindowsWithTitle(title):
+    for w in gw.getWindowsWithTitle(title):
         windows.append({
             "window": w,
             "login" : 0,

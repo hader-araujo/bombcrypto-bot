@@ -28,7 +28,6 @@ def clickWorkAllButton():
 
 def clickGreenBarButtons():
     debug_mode_enabled = env.debug['clickGreenBarButtons']
-    offset = 130    
 
     green_bars = getPositions(env.images['green-bar'], threshold=env.threshold['green_bar']*env.scale_image['threshold'] if env.scale_image['enable'] else env.threshold['green_bar'])
     Log.logger('🟩 %d green bars detected' % len(green_bars))
@@ -48,7 +47,7 @@ def clickGreenBarButtons():
         Log.logger('👆 Clicking in %d heroes' % len(not_working_green_bars))
 
     for (x, y, w, h) in not_working_green_bars:
-        pos_click_x = x+offset+(w/2)
+        pos_click_x = x+env.green_bar_offset+(w/2)
         pos_click_y = y+(h/2)
         moveToWithRandomness(pos_click_x,pos_click_y)
         pyautogui.click()
@@ -60,7 +59,6 @@ def clickGreenBarButtons():
 
 def clickFullBarButtons():
     debug_mode_enabled = env.debug['clickFullBarButtons']
-    offset = 100
 
     full_bars = getPositions(env.images['full-stamina'], threshold=env.threshold['default']*env.scale_image['threshold'] if env.scale_image['enable'] else env.threshold['default'])
     buttons = getPositions(env.images['go-work'], threshold=env.threshold['go_to_work_btn']*env.scale_image['threshold'] if env.scale_image['enable'] else env.threshold['go_to_work_btn'])
@@ -79,7 +77,7 @@ def clickFullBarButtons():
 
     for (x, y, w, h) in not_working_full_bars:
         
-        pos_click_x = x+offset+(w/2)
+        pos_click_x = x+env.full_bar_offset+(w/2)
         pos_click_y = y+(h/2)
         moveToWithRandomness(pos_click_x,pos_click_y)
         pyautogui.click()
