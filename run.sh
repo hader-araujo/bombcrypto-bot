@@ -1,4 +1,8 @@
 #/bin/bash
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  pip install -r requirements-mac.txt
+else
+  pip install -r requirements.txt
+fi
 
-pip install -r requirements.txt
 python index.py

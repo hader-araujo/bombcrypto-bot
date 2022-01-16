@@ -10,12 +10,6 @@ def login():
     Log.logger('😿 Checking if game has disconnected')
     sleep(5)
 
-    # if env.login_attempts > 3:
-    #     Log.logger('🔃 Too many login attempts, refreshing')
-    #     env.login_attempts = 0
-    #     pyautogui.hotkey('ctrl','f5')
-    #     return
-
     already_refreshed = False
     if clickBtn(env.images['ok'], name='okBtn', timeout=5):
         already_refreshed = True
