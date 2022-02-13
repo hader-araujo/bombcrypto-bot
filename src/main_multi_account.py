@@ -38,10 +38,10 @@ def runMultiAccount():
 
     while True:
         
-        for last in windows:
+        for index, last in windows:
             env.window_object = last["window"]
-            Log.logger('Client active window: {}'.format(last['window'].title), color='green')
-            time.sleep(5)
+            Log.logger('{} -> CLIENT ACTIVE WINDOW: {}'.format(index+1, last['window'].title), color='green')
+            time.sleep(2)
 
             now = time.time()
             if now - last["login"] > addRandomness(intervals['check_for_login'] * 60):
