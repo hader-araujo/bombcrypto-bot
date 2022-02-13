@@ -40,7 +40,7 @@ def runMultiAccount():
         
         for index, last in enumerate(windows):
             env.window_object = last["window"]
-            Log.logger('{} -> CLIENT ACTIVE WINDOW: {}'.format(index+1, last['window'].title), color='green')
+            Log.logger('CLIENT ACTIVE WINDOW -> {} : {}'.format(index+1, last['window'].title), color='green')
             time.sleep(2)
 
             now = time.time()
