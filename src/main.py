@@ -31,11 +31,11 @@ def run():
             last["heroes"] = now
             Heroes.refreshHeroes()
 
-        if now - last["new_map"] > intervals['check_for_new_map_button']:
-            last["new_map"] = now
-
-            if clickBtn(env.images['new-map']):
-                Log.logNewMapClicked()
+        # if now - last["new_map"] > intervals['check_for_new_map_button']:
+        #     last["new_map"] = now
+        #
+        #     if clickBtn(env.images['new-map']):
+        #         Log.logNewMapClicked()
 
         if now - last["refresh_heroes"] > addRandomness( intervals['refresh_heroes_positions'] * 60):
             last["refresh_heroes"] = now

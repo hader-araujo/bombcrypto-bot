@@ -153,9 +153,13 @@ def refreshHeroes():
         work_all_clicked = clickWorkAllButton()
         if work_all_clicked:
             Log.logger('💪 ALL heroes sent to work')
+        else:
+            time.sleep(2)
+            Log.logger('Tentando clicar no botao all novamente')
+            clickWorkAllButton()
         time.sleep(2)
 
-    if not work_all_clicked:
+    elif not work_all_clicked:
         env.hero_clicks = 0
         while(empty_scrolls_attempts >0):
             sendHeroesToWork()

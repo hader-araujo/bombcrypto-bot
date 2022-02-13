@@ -23,7 +23,7 @@ time_intervals:
   #
   # [pt_BR] Intervalo de tempo para verificar por novos mapas
   # Valor padrão (em segundos): 5
-  check_for_new_map_button: 5
+  check_for_new_map_button: 9999
 
   # [en_US] Time interval to check for login request
   # Default value (in minutes): 3
@@ -134,7 +134,7 @@ click_and_drag_amount: 200
 # all   = seleciona todos os heróis (independente da barra de stamina)
 # green = seleciona os heróis com a barra de stamina verde (metade ou cheia)
 # full  = seleciona somente os heróis com a barra de stamina cheia
-select_heroes_mode: "green"
+select_heroes_mode: "all"
 
 # [en_US] Option for save logs to a file (logs.txt)
 # Default value: False
@@ -151,7 +151,7 @@ save_log_to_file: True
 # [pt_BR] Opção para usar multiplas contas no mesmo monitor
 # Valor padrão: False
 multiples_accounts_same_monitor:
-  enable: False
+  enable: True
   window_contains_title: "bombcrypto"
 
 # [en_US] If you have macbook or laptop with Retina screen, enable this feature
