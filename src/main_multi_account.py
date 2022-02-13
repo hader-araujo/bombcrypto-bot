@@ -38,7 +38,7 @@ def runMultiAccount():
 
     while True:
         
-        for index, last in windows:
+        for index, last in enumerate(windows):
             env.window_object = last["window"]
             Log.logger('{} -> CLIENT ACTIVE WINDOW: {}'.format(index+1, last['window'].title), color='green')
             time.sleep(2)
