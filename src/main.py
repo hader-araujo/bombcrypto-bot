@@ -20,16 +20,20 @@ def run():
     }
 
     while True:
-        now = time.time()
 
+        now = time.time()
         if now - last["login"] > addRandomness(intervals['check_for_login'] * 60):
             sys.stdout.flush()
-            last["login"] = now
-            Auth.login()
 
-        if now - last["heroes"] > addRandomness(intervals['send_heroes_for_work'] * 60):
-            last["heroes"] = now
-            Heroes.refreshHeroes()
+            if Auth.login():
+                last["login"] = now
+                last["refresh_heroes"] = now
+
+        now = time.time()
+        if now - last["heroes"] > addRandomness( intervals['send_heroes_for_work'] * 60):
+            if Heroes.refreshHeroes():
+                last["heroes"] = now
+                last["refresh_heroes"] = now
 
         # if now - last["new_map"] > intervals['check_for_new_map_button']:
         #     last["new_map"] = now
@@ -37,9 +41,10 @@ def run():
         #     if clickBtn(env.images['new-map']):
         #         Log.logNewMapClicked()
 
+        now = time.time()
         if now - last["refresh_heroes"] > addRandomness( intervals['refresh_heroes_positions'] * 60):
-            last["refresh_heroes"] = now
-            Action.refreshHeroesPositions()
+            if Action.refreshHeroesPositions():
+                last["refresh_heroes"] = now
 
         Log.logger(None, progress_indicator=True)
 

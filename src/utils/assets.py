@@ -16,6 +16,20 @@ def loadHeroesImagesToHome():
     print('>>---> %d heroes that should be sent home loaded' % len(heroes))
     return heroes
 
+
+def loadHeroesImagesToHomeBackup():
+    file_names = listdir('./targets/heroes-to-send-home-backup')
+    heroes = []
+    for file in file_names:
+        path = './targets/heroes-to-send-home-backup/' + file
+        # TODO: add scale?
+        hero_image = cv2.imread(path)
+        heroes.append(hero_image)
+
+    print('>>---> %d heroes that should be sent home backup loaded' % len(heroes))
+    return heroes
+
+
 def loadImages():
     file_names = listdir('./targets/')
     targets = {}

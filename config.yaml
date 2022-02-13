@@ -9,7 +9,7 @@ time_intervals:
   #
   # [pt_BR] Intervalo de tempo para verificar se há heróis disponíveis para trabalhar
   # Valor padrão (em minutos): 10
-  send_heroes_for_work: 12
+  send_heroes_for_work: 25
 
   # [en_US] Time interval to update heroes position in the map,
   # Default value (in minutes): 3
@@ -87,10 +87,11 @@ threshold:
   green_bar: 0.9
 
 home:
-  enable: False
+  enable: True
+  quantity: 4
   # If bot is sending the wrong hero home, make this number bigger.
   # if bot is not sending any hero home make this number smaller.
-  hero_threshold: 0.90
+  hero_threshold: 0.98
   home_button_threshold: 0.95
 
 # [en_US]
@@ -105,7 +106,7 @@ scroll_size: 60
 #
 # [pt_BR]
 # Valor padrão: 3
-scroll_attemps: 4
+scroll_attemps: 2
 
 # [en_US]
 # Default value: true
@@ -119,7 +120,7 @@ use_click_and_drag_instead_of_scroll: true
 #
 # [pt_BR]
 # Valor padrão: 200
-click_and_drag_amount: 200
+click_and_drag_amount: 300
 
 # [en_US]
 # Default value: green
@@ -151,7 +152,7 @@ save_log_to_file: True
 # [pt_BR] Opção para usar multiplas contas no mesmo monitor
 # Valor padrão: False
 multiples_accounts_same_monitor:
-  enable: True
+  enable: False
   window_contains_title: "bombcrypto"
 
 # [en_US] If you have macbook or laptop with Retina screen, enable this feature

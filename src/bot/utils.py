@@ -1,3 +1,6 @@
+import src.env as env
+from src.bot.action import getPositions
+
 def isHome(hero, buttons):
     y = hero[1]
 
@@ -16,4 +19,17 @@ def isWorking(bar, buttons):
         isAbove = y > (button_y - button_h)
         if isBelow and isAbove:
             return False
+    return True
+
+def isRedBar(bar):
+    green_bars = getPositions(env.images['green-bar'],
+                              threshold=env.threshold['green_bar'] * env.scale_image['threshold'] if env.scale_image[
+                                  'enable'] else env.threshold['green_bar'])
+
+    for green in green_bars:
+
+        diff = green[1] - bar[1]
+        if -10 <= diff <= 20:
+            return False
+
     return True

@@ -61,6 +61,22 @@ def scroll():
     else:
         pyautogui.dragRel(0,-env.cfg['click_and_drag_amount'],duration=1, button='left')
 
+
+def scroll_backwards():
+    hero_item_list = getPositions(env.images['hero-item'], threshold = env.threshold['commom'])
+    if env.debug['scroll']:
+        show(hero_item_list, None, '[scroll] hero_item_list')
+    if (len(hero_item_list) == 0):
+        return
+    x,y,w,h = hero_item_list[1]
+    moveToWithRandomness(x,y)
+
+    if not env.cfg['use_click_and_drag_instead_of_scroll']:
+        pyautogui.scroll(-env.cfg['scroll_size'])
+    else:
+        pyautogui.dragRel(0,env.cfg['click_and_drag_amount'],duration=1, button='left')
+
+
 def getPositions(target, threshold=env.threshold['default'],img = None):
     if img is None:
         running_multi_account = env.window_object is not None

@@ -1,4 +1,4 @@
-from src.utils.assets import loadImages, loadHeroesImagesToHome
+from src.utils.assets import loadImages, loadHeroesImagesToHome, loadHeroesImagesToHomeBackup
 from src.utils.config import loadConfigsFromFile
 from src.bot.logger import logger
 
@@ -12,6 +12,7 @@ global login_attempts
 global hero_clicks
 global last_log_is_progress
 global home_heroes
+global home_qtd
 global images
 global multi_account_same_monitor
 global force_full_screen
@@ -26,6 +27,7 @@ hero_clicks = 0
 last_log_is_progress = False
 images = []
 home_heroes = []
+home_qtd = 0
 force_full_screen = False
 in_login_process = False
 
@@ -44,3 +46,5 @@ images = loadImages()
 if home['enable']:
     logger('HOME Enabled. Loading heroes assets...', color='green')
     home_heroes = loadHeroesImagesToHome()
+    home_heroes_backup = loadHeroesImagesToHomeBackup()
+    home_qtd = home['quantity']
