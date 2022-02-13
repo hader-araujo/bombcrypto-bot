@@ -135,37 +135,42 @@ def sendHeroesToWork():
         return clickButtons()
 
 def refreshHeroes():
-    Log.logger('🏢 Search for heroes to work')
+    try:
+        Log.logger('🏢 Search for heroes to work')
 
-    goToHeroes()
+        goToHeroes()
 
-    if env.cfg['select_heroes_mode'] == "full":
-        Log.logger('⚒️ Sending heroes with full stamina bar to work', 'green')
-    elif env.cfg['select_heroes_mode'] == "green":
-        Log.logger('⚒️ Sending heroes with green stamina bar to work', 'green')
-    else:
-        Log.logger('⚒️ Sending all heroes to work', 'green')
-
-    empty_scrolls_attempts = env.cfg['scroll_attemps']
-    work_all_clicked = False
-    if not env.home['enable'] and env.cfg['select_heroes_mode'] == 'all':
-        time.sleep(1)
-        work_all_clicked = clickWorkAllButton()
-        if work_all_clicked:
-            Log.logger('💪 ALL heroes sent to work')
+        if env.cfg['select_heroes_mode'] == "full":
+            Log.logger('⚒️ Sending heroes with full stamina bar to work', 'green')
+        elif env.cfg['select_heroes_mode'] == "green":
+            Log.logger('⚒️ Sending heroes with green stamina bar to work', 'green')
         else:
-            time.sleep(2)
-            Log.logger('Tentando clicar no botao all novamente')
-            clickWorkAllButton()
-        time.sleep(2)
+            Log.logger('⚒️ Sending all heroes to work', 'green')
 
-    elif not work_all_clicked:
-        env.hero_clicks = 0
-        while(empty_scrolls_attempts >0):
-            sendHeroesToWork()
-            sendHeroesHome()
-            empty_scrolls_attempts = empty_scrolls_attempts - 1
-            scroll()
+        empty_scrolls_attempts = env.cfg['scroll_attemps']
+        work_all_clicked = False
+        if not env.home['enable'] and env.cfg['select_heroes_mode'] == 'all':
+            time.sleep(1)
+            work_all_clicked = clickWorkAllButton()
+            if work_all_clicked:
+                Log.logger('💪 ALL heroes sent to work')
+            else:
+                time.sleep(2)
+                Log.logger('Tentando clicar no botao all novamente')
+                clickWorkAllButton()
             time.sleep(2)
-        Log.logger('💪 {} heroes sent to work'.format(env.hero_clicks))
-    goToGame()
+
+        elif not work_all_clicked:
+            env.hero_clicks = 0
+            while(empty_scrolls_attempts >0):
+                sendHeroesToWork()
+                sendHeroesHome()
+                empty_scrolls_attempts = empty_scrolls_attempts - 1
+                scroll()
+                time.sleep(2)
+            Log.logger('💪 {} heroes sent to work'.format(env.hero_clicks))
+        goToGame()
+        return True
+    except:
+        Log.logger('Erro tentar dar refresh nos heroes')
+        return False

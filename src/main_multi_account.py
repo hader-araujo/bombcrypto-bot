@@ -37,33 +37,39 @@ def runMultiAccount():
         exit()
 
     while True:
-        now = time.time()
         
         for last in windows:
             env.window_object = last["window"]
             Log.logger('Client active window: {}'.format(last['window'].title), color='green')
             time.sleep(5)
-            
+
+            now = time.time()
             if now - last["login"] > addRandomness(intervals['check_for_login'] * 60):
                 Action.activeWindow()
                 sys.stdout.flush()
-                last["login"] = now
-                Auth.login()
 
+                if Auth.login():
+                    last["login"] = now
+                    last["refresh_heroes"] = now
+
+            now = time.time()
             if now - last["heroes"] > addRandomness(intervals['send_heroes_for_work'] * 60):
                 Action.activeWindow()
-                last["heroes"] = now
-                Heroes.refreshHeroes()
 
-            if now - last["new_map"] > intervals['check_for_new_map_button']:
-                Action.activeWindow()
-                last["new_map"] = now
-                Action.goToNextMap()
+                if Heroes.refreshHeroes():
+                    last["heroes"] = now
+                    last["refresh_heroes"] = now
 
+            # if now - last["new_map"] > intervals['check_for_new_map_button']:
+            #     Action.activeWindow()
+            #     last["new_map"] = now
+            #     Action.goToNextMap()
+
+            now = time.time()
             if now - last["refresh_heroes"] > addRandomness( intervals['refresh_heroes_positions'] * 60):
                 Action.activeWindow()
-                last["refresh_heroes"] = now
-                Action.refreshHeroesPositions()
+                if Action.refreshHeroesPositions():
+                    last["refresh_heroes"] = now
 
             Log.logger(None, progress_indicator=True)
             sys.stdout.flush()

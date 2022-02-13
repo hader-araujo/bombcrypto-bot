@@ -33,7 +33,7 @@ def login():
         in_login_screen = getPositions(env.images['connect-wallet'], threshold=env.threshold['default'])
         if(len(in_login_screen)==0):
             Log.logger('Already logged...', color='cyan')
-            return
+            return True
         else:
             Log.logger('Logging process start...', color='cyan')
 
@@ -47,12 +47,15 @@ def login():
             env.login_attempts = env.login_attempts + 1
             if clickBtn(env.images['treasure-hunt-icon'], name='teasureHunt', timeout = 15):
                 env.login_attempts = 0
-            return
+            return True
 
         if clickBtn(env.images['ok'], name='okBtn', timeout=5):
             pass
+
+        return True
     except:
         Log.logger('Erro ao fazer login')
+        return False
 
 @checkMetamaskNotification
 def clickOnSignIn():

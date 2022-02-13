@@ -38,7 +38,7 @@ def clickBtn(img,name=None, timeout=3, threshold = env.threshold['default']):
                     pass
                 return False
             continue
-        if env.debug['clickBtn']:        
+        if env.debug['clickBtn']:
             show(matches, None, '[clickBtn] name -> {}'.format(name))
         x,y,w,h = matches[0]
         pos_click_x = x+w/2
@@ -49,7 +49,7 @@ def clickBtn(img,name=None, timeout=3, threshold = env.threshold['default']):
 
 def scroll():
     hero_item_list = getPositions(env.images['hero-item'], threshold = env.threshold['commom'])
-    if env.debug['scroll']:        
+    if env.debug['scroll']:
         show(hero_item_list, None, '[scroll] hero_item_list')
     if (len(hero_item_list) == 0):
         return
@@ -97,10 +97,15 @@ def goToGame():
     clickBtn(env.images['treasure-hunt-icon'])
 
 def refreshHeroesPositions():
-    Log.logger('🔃 Refreshing Heroes Positions')
-    clickBtn(env.images['go-back-arrow'])
-    clickBtn(env.images['treasure-hunt-icon'])
-    clickBtn(env.images['treasure-hunt-icon'])
+    try:
+        Log.logger('🔃 Refreshing Heroes Positions')
+        clickBtn(env.images['go-back-arrow'])
+        clickBtn(env.images['treasure-hunt-icon'])
+        clickBtn(env.images['treasure-hunt-icon'])
+        return True
+    except:
+        Log.logger('Erro tentar dar refresh nas posicoes dos heroes')
+        return False
 
 def activeWindow():
     try:
