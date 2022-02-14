@@ -3,6 +3,7 @@ import pyautogui
 
 import src.env as env
 import src.bot.logger as Log
+import src.bot.login as Auth
 from src.bot.action import clickBtn, goToGame, goToHeroes, moveToWithRandomness, scroll, getPositions
 from src.bot.utils import isHome, isWorking
 from src.utils.opencv import show
@@ -24,7 +25,7 @@ def clickWorkAllButton():
     if env.debug['clickWorkAllButton']:
         buttons = getPositions(env.images['go-work-all'], threshold=env.threshold['go_to_work_all_btn']*env.scale_image['threshold'] if env.scale_image['enable'] else env.threshold['go_to_work_all_btn'])
         show(buttons, None, '[clickWorkAllButton] [temp] buttons')
-    return clickBtn(env.images['go-work-all'],'go-work-all', timeout=4, threshold=env.threshold['go_to_work_all_btn']*env.scale_image['threshold'] if env.scale_image['enable'] else env.threshold['go_to_work_all_btn'])
+    return clickBtn(env.images['go-work-all'],'go-work-all', timeout=3, threshold=env.threshold['go_to_work_all_btn']*env.scale_image['threshold'] if env.scale_image['enable'] else env.threshold['go_to_work_all_btn'])
 
 def clickGreenBarButtons():
     debug_mode_enabled = env.debug['clickGreenBarButtons']
@@ -138,7 +139,10 @@ def refreshHeroes():
     try:
         Log.logger('🏢 Search for heroes to work')
 
-        goToHeroes()
+        if not goToHeroes():
+            Log.logger('Tentativa de login ao madnar trabalhar')
+            Auth.login()
+            time.sleep(1)
 
         if env.cfg['select_heroes_mode'] == "full":
             Log.logger('⚒️ Sending heroes with full stamina bar to work', 'green')
@@ -150,15 +154,15 @@ def refreshHeroes():
         empty_scrolls_attempts = env.cfg['scroll_attemps']
         work_all_clicked = False
         if not env.home['enable'] and env.cfg['select_heroes_mode'] == 'all':
-            time.sleep(1)
+            # time.sleep(1)
             work_all_clicked = clickWorkAllButton()
             if work_all_clicked:
                 Log.logger('💪 ALL heroes sent to work')
             else:
-                time.sleep(2)
+                time.sleep(1)
                 Log.logger('Tentando clicar no botao all novamente')
                 clickWorkAllButton()
-            time.sleep(2)
+            time.sleep(1)
 
         elif not work_all_clicked:
             env.hero_clicks = 0
