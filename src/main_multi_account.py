@@ -6,7 +6,6 @@ from src.utils.number import addRandomness
 import src.bot.logger as Log
 import src.env as env
 import src.bot.heroes as Heroes
-import src.bot.login as Auth
 import src.bot.action as Action
 
 def runMultiAccount():
@@ -43,14 +42,14 @@ def runMultiAccount():
             Log.logger('CLIENT ACTIVE WINDOW -> {} : {}'.format(index+1, last['window'].title), color='green')
             time.sleep(2)
 
-            now = time.time()
-            if now - last["login"] > addRandomness(intervals['check_for_login'] * 60):
-                Action.activeWindow()
-                sys.stdout.flush()
-
-                if Auth.login():
-                    last["login"] = now
-                    last["refresh_heroes"] = now
+            # now = time.time()
+            # if now - last["login"] > addRandomness(intervals['check_for_login'] * 60):
+            #     Action.activeWindow()
+            #     sys.stdout.flush()
+            #
+            #     if Auth.login():
+            #         last["login"] = now
+            #         last["refresh_heroes"] = now
 
             now = time.time()
             if now - last["heroes"] > addRandomness(intervals['send_heroes_for_work'] * 60):

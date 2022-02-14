@@ -8,6 +8,7 @@ import pygetwindow
 
 import src.bot.logger as Log
 import src.env as env
+import src.bot.login as Auth
 from src.utils.number import addRandomness
 from src.utils.image import printScreen, printScreenForWindow
 from src.decorators.force_full_screen import forceFullScreenForThis
@@ -87,8 +88,10 @@ def goToHeroes():
     if clickBtn(env.images['go-back-arrow']):
         env.login_attempts = 0
     time.sleep(1)
-    clickBtn(env.images['hero-icon'])
-    time.sleep(1)
+    try:
+        return clickBtn(env.images['hero-icon'])
+    finally:
+        time.sleep(1)
 
 def goToGame():
     clickBtn(env.images['x'])
@@ -105,6 +108,11 @@ def refreshHeroesPositions():
         return True
     except:
         Log.logger('Erro tentar dar refresh nas posicoes dos heroes')
+
+        Log.logger('Tentativa de login ao fazer refresh')
+        Auth.login()
+        time.sleep(1)
+
         return False
 
 def activeWindow():
