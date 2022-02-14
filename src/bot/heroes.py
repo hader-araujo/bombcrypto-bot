@@ -3,6 +3,7 @@ import pyautogui
 
 import src.env as env
 import src.bot.logger as Log
+import src.bot.login as Auth
 from src.bot.action import clickBtn, goToGame, goToHeroes, moveToWithRandomness, scroll, getPositions
 from src.bot.utils import isHome, isWorking
 from src.utils.opencv import show
@@ -138,7 +139,11 @@ def refreshHeroes():
     try:
         Log.logger('🏢 Search for heroes to work')
 
-        goToHeroes()
+        if not goToHeroes():
+            Log.logger('Tentativa de login ao madnar trabalhar')
+            Auth.login()
+            time.sleep(1)
+            goToHeroes()
 
         if env.cfg['select_heroes_mode'] == "full":
             Log.logger('⚒️ Sending heroes with full stamina bar to work', 'green')
@@ -155,10 +160,10 @@ def refreshHeroes():
             if work_all_clicked:
                 Log.logger('💪 ALL heroes sent to work')
             else:
-                time.sleep(2)
+                time.sleep(1)
                 Log.logger('Tentando clicar no botao all novamente')
                 clickWorkAllButton()
-            time.sleep(2)
+            time.sleep(1)
 
         elif not work_all_clicked:
             env.hero_clicks = 0
@@ -171,6 +176,7 @@ def refreshHeroes():
             Log.logger('💪 {} heroes sent to work'.format(env.hero_clicks))
         goToGame()
         return True
-    except:
+    except Exception as e:
         Log.logger('Erro tentar dar refresh nos heroes')
+        Log.logger("Exception: %s" % (str(e)), color='red')
         return False

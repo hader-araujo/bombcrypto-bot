@@ -18,26 +18,26 @@ def login():
         #     pyautogui.hotkey('ctrl','f5')
         #     return
 
-        already_refreshed = False
-        if clickBtn(env.images['ok'], name='okBtn', timeout=5):
-            already_refreshed = True
-        sleep(15)
+        # already_refreshed = False
+        # if clickBtn(env.images['ok'], name='okBtn', timeout=5):
+        #     already_refreshed = True
+        # sleep(15)
 
         closeMetamaskWindow()
-        if not already_refreshed:
-            in_login_screen = getPositions(env.images['connect-wallet'], threshold=env.threshold['default'])
-            if(len(in_login_screen)!=0):
-                pyautogui.hotkey('ctrl','f5')
+        # if not already_refreshed:
+        # in_login_screen = getPositions(env.images['connect-wallet'], threshold=env.threshold['default'])
+        # if(len(in_login_screen)!=0):
+        pyautogui.hotkey('ctrl','f5')
 
         Log.logger('Loggin attempt: {}'.format(env.login_attempts), color='yellow')
-        in_login_screen = getPositions(env.images['connect-wallet'], threshold=env.threshold['default'])
-        if(len(in_login_screen)==0):
-            Log.logger('Already logged...', color='cyan')
-            return True
-        else:
-            Log.logger('Logging process start...', color='cyan')
+        # in_login_screen = getPositions(env.images['connect-wallet'], threshold=env.threshold['default'])
+        # if(len(in_login_screen)==0):
+        #     Log.logger('Already logged...', color='cyan')
+        #     return True
+        # else:
+        #     Log.logger('Logging process start...', color='cyan')
 
-        sleep(10)
+        sleep(8)
 
         if clickBtn(env.images['connect-wallet'], name='connectWalletBtn', timeout = 10):
             Log.logger('🎉 Connect wallet button detected, logging in!')
