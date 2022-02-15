@@ -74,7 +74,6 @@ def getPositions(target, threshold=env.threshold['default'],img = None):
 
     yloc, xloc = np.where(result >= threshold)
 
-
     rectangles = []
     for (x, y) in zip(xloc, yloc):
         rectangles.append([int(x), int(y), int(w), int(h)])
@@ -84,11 +83,18 @@ def getPositions(target, threshold=env.threshold['default'],img = None):
     return rectangles
 
 def goToHeroes():
-    if clickBtn(env.images['go-back-arrow']):
-        env.login_attempts = 0
-    time.sleep(1)
-    clickBtn(env.images['hero-icon'])
-    time.sleep(1)
+    try:
+
+        if not clickBtn(env.images['go-back-arrow']):
+            Log.logger('Botao voltar nao localizado')
+        time.sleep(1)
+        if not clickBtn(env.images['hero-icon']):
+            Log.logger('Botao heroi nao localizado')
+            raise Exception('Botao heroi nao localizado')
+        time.sleep(1)
+        return True
+    except:
+        return False
 
 def goToGame():
     clickBtn(env.images['x'])
@@ -111,7 +117,6 @@ def activeWindow():
     try:
         env.window_object.activate()
     except:
-        env.window_object.minimize()
         env.window_object.activate()
 
 @forceFullScreenForThis
@@ -122,7 +127,7 @@ def goToNextMap():
 def closeMetamaskWindow():
     try:
         title = 'MetaMask Notification'
-        time.sleep(7)
+        # time.sleep(7)
         windows = pygetwindow.getWindowsWithTitle(title)
         for window in windows:
             window.close()

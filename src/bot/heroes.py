@@ -1,3 +1,4 @@
+import sys
 import time
 import pyautogui
 
@@ -24,7 +25,7 @@ def clickWorkAllButton():
     if env.debug['clickWorkAllButton']:
         buttons = getPositions(env.images['go-work-all'], threshold=env.threshold['go_to_work_all_btn']*env.scale_image['threshold'] if env.scale_image['enable'] else env.threshold['go_to_work_all_btn'])
         show(buttons, None, '[clickWorkAllButton] [temp] buttons')
-    return clickBtn(env.images['go-work-all'],'go-work-all', timeout=4, threshold=env.threshold['go_to_work_all_btn']*env.scale_image['threshold'] if env.scale_image['enable'] else env.threshold['go_to_work_all_btn'])
+    return clickBtn(env.images['go-work-all'],'go-work-all', timeout=2, threshold=env.threshold['go_to_work_all_btn']*env.scale_image['threshold'] if env.scale_image['enable'] else env.threshold['go_to_work_all_btn'])
 
 def clickGreenBarButtons():
     debug_mode_enabled = env.debug['clickGreenBarButtons']
@@ -138,37 +139,20 @@ def refreshHeroes():
     try:
         Log.logger('🏢 Search for heroes to work')
 
-        goToHeroes()
+        if not goToHeroes():
+            Log.logger('Erro ao selecionar o botao voltar')
+            return False
 
-        if env.cfg['select_heroes_mode'] == "full":
-            Log.logger('⚒️ Sending heroes with full stamina bar to work', 'green')
-        elif env.cfg['select_heroes_mode'] == "green":
-            Log.logger('⚒️ Sending heroes with green stamina bar to work', 'green')
-        else:
-            Log.logger('⚒️ Sending all heroes to work', 'green')
-
-        empty_scrolls_attempts = env.cfg['scroll_attemps']
-        work_all_clicked = False
         if not env.home['enable'] and env.cfg['select_heroes_mode'] == 'all':
             time.sleep(1)
             work_all_clicked = clickWorkAllButton()
             if work_all_clicked:
                 Log.logger('💪 ALL heroes sent to work')
             else:
-                time.sleep(2)
                 Log.logger('Tentando clicar no botao all novamente')
                 clickWorkAllButton()
             time.sleep(2)
 
-        elif not work_all_clicked:
-            env.hero_clicks = 0
-            while(empty_scrolls_attempts >0):
-                sendHeroesToWork()
-                sendHeroesHome()
-                empty_scrolls_attempts = empty_scrolls_attempts - 1
-                scroll()
-                time.sleep(2)
-            Log.logger('💪 {} heroes sent to work'.format(env.hero_clicks))
         goToGame()
         return True
     except:

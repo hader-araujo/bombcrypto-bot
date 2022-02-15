@@ -9,14 +9,14 @@ time_intervals:
   #
   # [pt_BR] Intervalo de tempo para verificar se há heróis disponíveis para trabalhar
   # Valor padrão (em minutos): 10
-  send_heroes_for_work: 12
+  send_heroes_for_work: 15
 
   # [en_US] Time interval to update heroes position in the map,
   # Default value (in minutes): 3
   #
   # [pt_BR] Intervalo de tempo para atualizar a posição dos heróis no mapa
   # Valor padrão (em minutos): 3
-  refresh_heroes_positions: 3
+  refresh_heroes_positions: 4
 
   # [en_US] Time interval to check for new maps
   # Default value (in minutes): 5
@@ -152,7 +152,7 @@ save_log_to_file: True
 # Valor padrão: False
 multiples_accounts_same_monitor:
   enable: True
-  window_contains_title: "bombcrypto"
+  window_contains_title: "bombcrypto - Opera"
 
 # [en_US] If you have macbook or laptop with Retina screen, enable this feature
 # Default value: False
