@@ -43,15 +43,6 @@ def runMultiAccount():
             Log.logger('CLIENT ACTIVE WINDOW -> {} : {}'.format(index+1, last['window'].title), color='green')
             time.sleep(2)
 
-            # now = time.time()
-            # if now - last["login"] > addRandomness(intervals['check_for_login'] * 60):
-            #     Action.activeWindow()
-            #     sys.stdout.flush()
-            #
-            #     if Auth.login():
-            #         last["login"] = now
-            #         last["refresh_heroes"] = now
-
             now = time.time()
             if now - last["heroes"] > addRandomness(intervals['send_heroes_for_work'] * 60):
                 Action.activeWindow()
@@ -65,9 +56,6 @@ def runMultiAccount():
 
                     if Auth.login():
                         last["refresh_heroes"] = now
-                        # if Heroes.refreshHeroes():
-                        #    last["heroes"] = now
-                        #    last["refresh_heroes"] = now
 
             now = time.time()
             if now - last["refresh_heroes"] > addRandomness( intervals['refresh_heroes_positions'] * 60):
