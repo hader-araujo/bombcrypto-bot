@@ -17,12 +17,12 @@ def login():
 
         pyautogui.hotkey('ctrl','f5')
 
-        sleep(10)
+        sleep(15)
 
         Log.logger('Fim do sleep do ctrl F5')
 
         Log.logger("Vai clicar no wallet 1")
-        if clickBtn(env.images['connect-wallet'], name='connectWalletBtn', timeout = 10):
+        if clickBtn(env.images['connect-wallet'], name='connectWalletBtn', timeout = 15):
             Log.logger('🎉 Connect wallet button detected, logging in!')
 
         Log.logger("Clicou no wallet 1")
