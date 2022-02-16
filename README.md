@@ -1,4 +1,4 @@
-#Bot modificado especificamente para funcionar com muitas contas na mesma máquina
+# Bot modificado especificamente para funcionar com muitas contas na mesma máquina
 Não utilizar com conta com casa, caso precise utilize:  https://github.com/hader-araujo/bomb-bot
 
 # Bombcrypto-bot
