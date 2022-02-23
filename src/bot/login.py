@@ -22,10 +22,14 @@ def login():
         Log.logger('Fim do sleep do ctrl F5')
 
         Log.logger("Vai clicar no wallet 1")
-        if clickBtn(env.images['connect-wallet'], name='connectWalletBtn', timeout = 15):
+        if clickBtn(env.images['connect-wallet'], name='connectWalletBtn', timeout=15):
             Log.logger('🎉 Connect wallet button detected, logging in!')
-
         Log.logger("Clicou no wallet 1")
+
+        Log.logger("Vai clicar no wallet 2")
+        if clickBtn(env.images['connect-wallet-2'], name='connectWallet2Btn', timeout=5):
+            Log.logger('🎉 Connect wallet 2 button detected, logging in!')
+        Log.logger("Clicou no wallet 2")
 
         if clickOnSignIn():
             pass
