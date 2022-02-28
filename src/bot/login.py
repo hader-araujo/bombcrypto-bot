@@ -16,26 +16,26 @@ def login():
 
         sleep(1)
 
-        metamask_password_login()
+        if not metamask_password_login():
 
-        if not clickBtn(env.images['connect-wallet'], name='connectWalletBtn', timeout=2):
-            pyautogui.hotkey('ctrl','f5')
+            if not clickBtn(env.images['connect-wallet'], name='connectWalletBtn', timeout=2):
+                pyautogui.hotkey('ctrl','f5')
 
-            sleep(13)
+                sleep(13)
 
-            Log.logger('Fim do sleep do ctrl F5')
+                Log.logger('Fim do sleep do ctrl F5')
 
-            Log.logger("Vai clicar no wallet 1")
-            if clickBtn(env.images['connect-wallet'], name='connectWalletBtn', timeout=15):
-                Log.logger('🎉 Connect wallet button detected, logging in!')
-            Log.logger("Clicou no wallet 1")
+                Log.logger("Vai clicar no wallet 1")
+                if clickBtn(env.images['connect-wallet'], name='connectWalletBtn', timeout=15):
+                    Log.logger('🎉 Connect wallet button detected, logging in!')
+                Log.logger("Clicou no wallet 1")
 
-        Log.logger("Vai clicar no wallet 2")
-        if clickBtn(env.images['connect-wallet-2'], name='connectWallet2Btn', timeout=5):
-            Log.logger('🎉 Connect wallet 2 button detected, logging in!')
-        Log.logger("Clicou no wallet 2")
+            Log.logger("Vai clicar no wallet 2")
+            if clickBtn(env.images['connect-wallet-2'], name='connectWallet2Btn', timeout=5):
+                Log.logger('🎉 Connect wallet 2 button detected, logging in!')
+            Log.logger("Clicou no wallet 2")
 
-        metamask_password_login()
+            metamask_password_login()
 
         if clickOnSignIn():
             pass
@@ -66,8 +66,10 @@ def metamask_password_login():
 
                 if clickBtn(env.images['b-logo'], name='metamaskUnlockBtn', timeout=2,stop_window_activation=True):
                     if clickBtn(env.images['metamask-without-notification'], name='metamaskNotificationBtn', timeout=10, threshold=0.99, to_not_click=True):
-                        sleep(1)
-                        clickBtn(env.images['metamask-notification'], name='metamaskNotificationBtn', timeout=2)
+                        # sleep(1)
+                        # clickBtn(env.images['metamask-notification'], name='metamaskNotificationBtn', timeout=2)
+                        return True
+    return False
 
 
 
