@@ -24,3 +24,5 @@ __pycache__/
 # vscode plugins
 /.history
 /.idea
+/venv
+/.venv

@@ -18,6 +18,7 @@ global force_full_screen
 global mouse_move_speed
 global in_login_process
 global debug
+global metamask_password
 
 logger('Setting up default values for variables...', color='green')
 window_object = None
@@ -28,6 +29,7 @@ images = []
 home_heroes = []
 force_full_screen = False
 in_login_process = False
+metamask_password = ''
 
 cfg = loadConfigsFromFile()
 
@@ -38,6 +40,7 @@ scale_image = cfg['scale_image']
 multi_account_same_monitor = cfg['multiples_accounts_same_monitor']
 mouse_move_speed = cfg['mouse_move_speed']
 debug = cfg['debug']
+metamask_password = cfg['metamask_password']
 
 logger('Loading assets...', color='green')
 images = loadImages()

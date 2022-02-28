@@ -24,13 +24,13 @@ def moveToWithRandomness(x,y,t=env.mouse_move_speed):
         pos_y = pos_y / 2
     pyautogui.moveTo(addRandomness(pos_x,10),addRandomness(pos_y,10),t+random()/2)
 
-def clickBtn(img,name=None, timeout=3, threshold = env.threshold['default']):
+def clickBtn(img,name=None, timeout=3, threshold = env.threshold['default'], stop_window_activation=False, to_not_click=False):
     Log.logger(None, progress_indicator=True)
     if not name is None:
         pass
     start = time.time()
     while(True):
-        matches = getPositions(img, threshold=threshold)
+        matches = getPositions(img, threshold=threshold, stop_window_activation=stop_window_activation)
         if(len(matches)==0):
             hast_timed_out = time.time()-start > timeout
             if(hast_timed_out):
@@ -44,7 +44,8 @@ def clickBtn(img,name=None, timeout=3, threshold = env.threshold['default']):
         pos_click_x = x+w/2
         pos_click_y = y+h/2
         moveToWithRandomness(pos_click_x,pos_click_y)
-        pyautogui.click()
+        if not to_not_click:
+            pyautogui.click()
         return True
 
 def scroll():
@@ -61,11 +62,11 @@ def scroll():
     else:
         pyautogui.dragRel(0,-env.cfg['click_and_drag_amount'],duration=1, button='left')
 
-def getPositions(target, threshold=env.threshold['default'],img = None):
+def getPositions(target, threshold=env.threshold['default'],img = None, stop_window_activation=False):
     if img is None:
         running_multi_account = env.window_object is not None
         if running_multi_account and not env.force_full_screen:
-            img = printScreenForWindow(env.window_object, env.in_login_process == False)
+            img = printScreenForWindow(env.window_object, env.in_login_process == False, stop_window_activation)
         else:
             img = printScreen()
         result = cv2.matchTemplate(img,target,cv2.TM_CCOEFF_NORMED)
@@ -136,7 +137,7 @@ def closeMetamaskWindow():
 
 def maximizeMetamaskNotification():
     title = 'MetaMask Notification'
-    time.sleep(8)
+    time.sleep(4)
     windows = pygetwindow.getWindowsWithTitle(title)
     if len(windows) > 0:
         current_window = windows[0]
