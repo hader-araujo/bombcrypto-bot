@@ -132,7 +132,7 @@ save_log_to_file: True
 #
 # [pt_BR] Para usar multiplas contas no mesmo monitor
 multiples_accounts_same_monitor:
-  window_contains_title: "bombcrypto - Opera"
+  window_contains_title: "bombcrypto"
 
 # [en_US] If you have macbook or laptop with Retina screen, enable this feature
 # Default value: False
